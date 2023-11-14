@@ -7,7 +7,7 @@ public class MinWeightGraph {
     }
     public static int minCostPath(int[][] W) {
 
-        // get size of row and column
+        // dimensions of 2d array
         int m = W.length;
         int n = W[0].length;
 

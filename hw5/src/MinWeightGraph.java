@@ -3,10 +3,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class MinWeightGraph {
-<<<<<<< Updated upstream
-
-    public static int[][] minCostPath(int[][] W) {
-=======
     public static int min(int a, int b, int c) {
         int smallest = a;
 
@@ -19,8 +15,8 @@ public class MinWeightGraph {
         }
         return smallest;
     }
-    public static int minCostPath(int[][] W) {
->>>>>>> Stashed changes
+
+    public static int[][] minCostPath(int[][] W) {
 
         // dimensions of 2d array
         int m = W.length;

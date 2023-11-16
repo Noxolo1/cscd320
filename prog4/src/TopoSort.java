@@ -6,9 +6,40 @@ import java.util.Scanner;
 
 public class TopoSort {
 
-    public static void graph_DFS(LinkedList<Integer>[] G, int s){
+    public static class Node{
 
-        
+        int u, time, p, d, f;
+        boolean visited;
+
+        public Node(int u, int time, int p, int d, int f, boolean visited) {
+            this.u = u;
+            this.time = time;
+            this.p = p;
+            this.d = d;
+            this.f = f;
+            this.visited = visited;
+        }
+    }
+
+    public static void graph_DFS(LinkedList<Node>[] G, Node node){
+
+        System.out.println(node.u);
+        node.time ++;
+        node.d = node.time;
+
+        //dont think we need this assignment
+        //node.visited = true;
+
+        for(Node n: G[node.u]){
+
+            if(!node.visited){
+                n.p = node.u;
+                graph_DFS(G, n);
+            }
+        }
+        node.time++;
+        node.f = node.time;
+        node.visited = true;
     }
 
     public static void main(String[] args) {

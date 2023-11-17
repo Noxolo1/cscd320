@@ -8,10 +8,11 @@ public class TopoSort {
 
     public static class Node{
 
-        int u, time, p, d, f;
+        int u, time, d, f;
         boolean visited;
+        Node p;
 
-        public Node(int u, int time, int p, int d, int f, boolean visited) {
+        public Node(int u, int time, Node p, int d, int f, boolean visited) {
             this.u = u;
             this.time = time;
             this.p = p;
@@ -33,13 +34,28 @@ public class TopoSort {
         for(Node n: G[node.u]){
 
             if(!node.visited){
-                n.p = node.u;
+                n.p = node;
                 graph_DFS(G, n);
             }
         }
+
         node.time++;
         node.f = node.time;
         node.visited = true;
+    }
+
+    public static void dfs(LinkedList<Node>[] G){
+
+        for (LinkedList<Node> nodes : G) {
+
+            for (Node n : nodes) {
+
+                n.visited = false;
+                n.p = null;
+            }
+        }
+
+        
     }
 
     public static void main(String[] args) {

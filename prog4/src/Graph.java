@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Graph {
 
-    ArrayList<LinkedList> list;
+    ArrayList<LL> list;
 
     public Graph() {
         list = new ArrayList<>();

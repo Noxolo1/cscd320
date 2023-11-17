@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class LinkedList {
+public class LL {
 
 
     /*private static class Node
@@ -26,10 +26,28 @@ public class LinkedList {
         }
     }*/
 
+    public static class Node{
+
+        public int value, d, f;
+        public boolean visited;
+        //public Node p;
+
+        public Node next;
+
+        public Node(int value, int d, int f, boolean visited) {
+            this.value = value;
+            this.d = d;
+            this.f = f;
+            this.visited = visited;
+            this.next = null;
+            //this.p = p;
+        }
+    }
+
     public Node head;
     public int size;
 
-    public LinkedList(Node head, int size) {
+    public LL(Node head, int size) {
         this.head = head;
         this.size = size;
     }
@@ -64,17 +82,15 @@ public class LinkedList {
      * @throws IllegalArgumentException if item is null
      */
 
-    public void addFirst(int value, int time, int d, int f, boolean visited, Node p){
-
-        Node newNode = new Node(value, d, f, visited, p);
+    public void addFirst(Node node){
 
         //check if list is empty
         if (head != null){
 
-            newNode.next = head;
+            node.next = head;
         }
 
-        head = newNode;
+        head = node;
         size++;
 
     }// end addFirst
@@ -426,20 +442,20 @@ public class LinkedList {
      *
      * @return String Representing the contents of the list
      */
-    /*public String toString(){
+    public String toString(){
 
         if(head == null){
-            return "The list is empty";
+            return "";
         }
         else{
 
-            Node<T> current = head;
+            Node current = head;
 
             StringBuilder result = new StringBuilder("[");
 
             for(int i=0;i<size;i++){
 
-                result.append(current.data);
+                result.append(current.value);
                 current = current.next;
                 if(current != null)
                     result.append(", ");
@@ -449,6 +465,22 @@ public class LinkedList {
             return result.toString();
         }
 
-    }*/
+    }
+
+    public static void main(String[] args){
+
+        LL list = new LL(null, 0);
+
+        Node node1 = new Node(1, 0, 0, false);
+        Node node2 = new Node(2, 0, 0, false);
+        Node node3 = new Node(3, 0, 0, false);
+        Node node4 = new Node(4, 0, 0, false);
+        Node node5 = new Node(5, 0, 0, false);
+        list.addFirst(node1);
+        list.addFirst(node2);
+        list.addFirst(node3);
+        list.addFirst(node4);
+        list.addFirst(node5);
+    }
 
 }// end list

@@ -1,12 +1,11 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class TopoSort {
 
-    public static class Node{
+    /*public static class Node{
 
         int u, time, d, f;
         boolean visited;
@@ -20,9 +19,9 @@ public class TopoSort {
             this.f = f;
             this.visited = visited;
         }
-    }
+    }*/
 
-    public static void graph_DFS(LinkedList<Node>[] G, Node node){
+    /*public static void graph_DFS(LinkedList<Node>[] G, Node node){
 
         System.out.println(node.u);
         node.time ++;
@@ -56,7 +55,7 @@ public class TopoSort {
         }
 
         
-    }
+    }*/
 
     public static void main(String[] args) {
 

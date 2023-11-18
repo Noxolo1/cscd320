@@ -30,7 +30,7 @@ public class LL {
 
         public int value, d, f;
         public boolean visited;
-        //public Node p;
+        public Node p;
 
         public Node next;
 
@@ -40,7 +40,7 @@ public class LL {
             this.f = f;
             this.visited = visited;
             this.next = null;
-            //this.p = p;
+            this.p = null;
         }
     }
 

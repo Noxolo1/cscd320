@@ -11,38 +11,38 @@ public class TopoSort {
     public void graph_DFS(ArrayList<LL> G, LL.Node node){
 
         System.out.println(node.value);
-        this.time ++;
-        node.d = node.time;
+        this.time++;
+        node.d = this.time;
 
         //dont think we need this assignment
         //node.visited = true;
 
-        for(Node n: G[node.u]){
+        // walk through every node of array list
+        // for the specified node value
+        for(int i = 0; i < G.get(node.value).size(); i++){
 
-            if(!node.visited){
-                n.p = node;
-                graph_DFS(G, n);
+            LL.Node cur = G.get(node.value).head;
+
+            if(!cur.visited){
+                cur.p = node;
+                graph_DFS(G, cur);
+                //think we will have a problem with advancing node
             }
         }
 
-        node.time++;
-        node.f = node.time;
+        this.time++;
+        node.f = this.time;
         node.visited = true;
     }
 
-    /*public static void dfs(LinkedList<Node>[] G){
+    public void dfs(ArrayList<LL> G){
 
-        for (LinkedList<Node> nodes : G) {
+        for(int i = 0; i < G.size(); i++) {
 
-            for (Node n : nodes) {
-
-                n.visited = false;
-                n.p = null;
-            }
+            G.get(i);
         }
 
-        
-    }*/
+    }
 
     public static void main(String[] args) {
         // check to make sure user entered input correctly

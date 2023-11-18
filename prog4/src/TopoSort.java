@@ -6,26 +6,12 @@ import java.util.Scanner;
 
 public class TopoSort {
 
-    /*public static class Node{
+    int time;
 
-        int u, time, d, f;
-        boolean visited;
-        Node p;
+    public void graph_DFS(ArrayList<LL> G, LL.Node node){
 
-        public Node(int u, int time, Node p, int d, int f, boolean visited) {
-            this.u = u;
-            this.time = time;
-            this.p = p;
-            this.d = d;
-            this.f = f;
-            this.visited = visited;
-        }
-    }*/
-
-    /*public static void graph_DFS(LinkedList<Node>[] G, Node node){
-
-        System.out.println(node.u);
-        node.time ++;
+        System.out.println(node.value);
+        this.time ++;
         node.d = node.time;
 
         //dont think we need this assignment
@@ -44,7 +30,7 @@ public class TopoSort {
         node.visited = true;
     }
 
-    public static void dfs(LinkedList<Node>[] G){
+    /*public static void dfs(LinkedList<Node>[] G){
 
         for (LinkedList<Node> nodes : G) {
 
@@ -59,7 +45,6 @@ public class TopoSort {
     }*/
 
     public static void main(String[] args) {
-
         // check to make sure user entered input correctly
         /*if (args.length != 1) {
             System.out.println("Format for command line input: java <program_name> <filename> ");
@@ -72,64 +57,55 @@ public class TopoSort {
         // create file object with user given file name
         File file = new File("/Users/nwilson/Documents/GitHub/cscd320/prog4/DAG2.txt");
 
-        ArrayList<LL> adjList = new ArrayList<>(10);
+        ArrayList<LL> adjList = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            adjList.add(new LL(null, 0));
-        }
+        // want to read through file and insert each line
+        // into the array list where the value of the node on the
+        // left of the : is stored in arraylist at the value
+
+        // 1. read the line
+        // 2. split at semicolon
+        // 3. populate linked list with right side values
+        // (if possible) by delimiting on a comma
+        // 4. use left value as index for array list
 
         // read through file and populate intArrayList with file contents
-        try {
+        try (Scanner readFile = new Scanner(file)) {
 
-            Scanner readFile = new Scanner(file);
-
-            while(readFile.hasNextLine()){
+            while (readFile.hasNextLine()) {
 
                 // create empty list
                 LL list = new LL(null, 0);
 
-                //p.add(Integer.parseInt(readFile.nextLine()));
-
-                // want to read through file and insert each line
-                // into the array list where the value of the node on the
-                // left of the : is stored in arraylist at the value
-
-                // 1. read the line
-                // 2. split at semi colon:
-                // 3. populate linked list with right side values
-                // by delimiting on a comma (if possible)
-                // 4. take left value and call arraylist.get(value, linkedlist)
-
-                // Split the line at colon
+                // split the line at colon
                 String[] parts = readFile.nextLine().split(":");
 
-                // Parse the left and right side values
+                // parse left and right side values
+                // left side is where we want to store ll
                 int leftValue = Integer.parseInt(parts[0]);
 
-                String[] rightSideValues = new String[parts.length - 1];
-                
-                if(parts.length > 1) {
-                    rightSideValues = parts[1].split(",");
-                }
+                String[] rightSideValues = parts.length > 1 ? parts[1].split(",") : new String[0];
 
                 for (String value : rightSideValues) {
-                    LL.Node node = new LL.Node((Integer.parseInt(value)), 0, 0, false);
+                    LL.Node node = new LL.Node(Integer.parseInt(value), 0, 0, false);
                     list.addFirst(node);
                 }
 
-                adjList.add(leftValue, list);
-            }
+                // Ensure the ArrayList is large enough
+                while (adjList.size() <= leftValue) {
+                    adjList.add(null);
+                }
 
-            readFile.close();
+                // Set the linked list at the correct index in the ArrayList
+                adjList.set(leftValue, list);
+            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         for (LL ll : adjList) {
-
             System.out.println(ll);
         }
-
     }
 }

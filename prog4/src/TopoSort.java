@@ -119,8 +119,6 @@ public class TopoSort {
 
         ArrayList<LL> adjList = new ArrayList<>();
 
-
-
         // want to read through file and insert each line
         // into the array list where the value of the node on the
         // left of the : is stored in arraylist at the value

@@ -1,10 +1,11 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Graph {
 
-    ArrayList<LL> list;
+    ArrayList<LL> adjList;
 
-    public Graph() {
-        list = new ArrayList<>();
+    public Graph(ArrayList<LL> adjList) {
+        this.adjList = adjList;
     }
 }

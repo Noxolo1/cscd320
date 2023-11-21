@@ -3,9 +3,10 @@ import java.util.ArrayList;
 
 public class Graph {
 
-    ArrayList<LL> adjList;
+    LL[] adjList;
+    LL.Node[] info;
 
-    public Graph(ArrayList<LL> adjList) {
+    public Graph(LL[] adjList) {
         this.adjList = adjList;
     }
 }

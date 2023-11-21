@@ -62,7 +62,6 @@ public class LL {
 
         head = node;
         size++;
-
     }
 
     public Node find(int value){

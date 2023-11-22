@@ -2,30 +2,6 @@ import java.util.*;
 
 public class LL {
 
-
-    /*private static class Node
-    {
-        public
-        public Node next;
-
-        public Node()
-        {
-            this.data = null;
-            this.next = null;
-        }
-
-        public Node(final T data)
-        {
-            this(data, null);
-        }
-
-        public Node(final T data, final Node next)
-        {
-            this.data = data;
-            this.next = next;
-        }
-    }*/
-
     public static class Node{
 
         public int value, d, f;
@@ -64,7 +40,7 @@ public class LL {
         size++;
     }
 
-    public Node find(int value){
+    /*public Node find(int value){
 
         Node cur = head;
 
@@ -76,7 +52,7 @@ public class LL {
         }
 
         return null;
-    }
+    }*/
 
     public Node get(final int index){
 

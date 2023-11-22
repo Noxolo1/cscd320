@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class TopoSort {
@@ -17,10 +15,12 @@ public class TopoSort {
 
         LL list = G[node.value];
 
-        // may need to check for null list
         if(list != null) {
             for (int i = 0; i < list.size(); i++) {
                 int value = list.get(i).value;
+
+                // if node in info array has not been visited,
+                // visit it
                 if (info[value].visited == false) {
                     info[value].p = node;
                     graphDFS(G, info, info[value], resultList);
@@ -39,6 +39,7 @@ public class TopoSort {
 
         LL resultList = new LL(null, 0);
 
+        // set all visited flags to false
         for (int i = 0; i < info.length; i++) {
             info[i].visited = false;
         }
@@ -46,6 +47,9 @@ public class TopoSort {
         this.time = 0;
 
         for (int i = 0; i < info.length; i++) {
+
+            // check if node has been visited
+            // if not, call graphDFS on respective node
             if(info[i].visited == false){
                 graphDFS(G, info, info[i], resultList);
             }
@@ -54,8 +58,21 @@ public class TopoSort {
         return resultList;
     }
 
+    public static void topoSort(LL[] G, LL.Node[] info){
+
+        TopoSort ts = new TopoSort();
+
+        LL resultList;
+        resultList = ts.DFS(G, info);
+
+        System.out.print("Topological Sort: ");
+        for(int i = 0; i < resultList.size; i++){
+            System.out.print(resultList.get(i).value + " ");
+        }
+    }
+
     // Helper method to find a node with a specific value in the adjacency list
-    private static LL.Node findNode(LL[] adjList, int value) {
+    /*private static LL.Node findNode(LL[] adjList, int value) {
         for (LL list : adjList) {
             if (list != null) {
                 LL.Node foundNode = list.find(value);
@@ -65,7 +82,7 @@ public class TopoSort {
             }
         }
         return null;
-    }
+    }*/
 
 
     public static int countRecords(final Scanner fin, final int linesPer) {
@@ -97,19 +114,6 @@ public class TopoSort {
         return count/linesPer;
     }
 
-    public static void topoSort(LL[] G, LL.Node[] info){
-
-        TopoSort ts = new TopoSort();
-
-        LL resultList = new LL(null, 0);
-        resultList = ts.DFS(G, info);
-
-        System.out.print("Topological Sort: ");
-        for(int i = 0; i < resultList.size; i++){
-            System.out.print(resultList.get(i).value + " ");
-        }
-    }
-
     public static void main(String[] args) {
         // check to make sure user entered input correctly
         /*if (args.length != 1) {
@@ -120,10 +124,11 @@ public class TopoSort {
         // file name is at position 0 in args
         //String filename = args[0];
 
-        // create file object with user given file name
-        File file = new File("/Users/nwilson/Documents/GitHub/cscd320/prog4/DAG4.txt");
+        File file = new File("C:\\Users\\Nate\\Documents\\GitHub\\cscd320\\prog4\\DAG4.txt");
 
+        // adjList to represent graph
         LL[] adjList;
+        // info array to hold info about nodes in the graph
         LL.Node[] info;
 
         // want to read through file and insert each line
@@ -137,10 +142,10 @@ public class TopoSort {
         // 4. use left value as index for array list
 
         // read through file and populate intArrayList with file contents
-        // read through file and populate intArrayList with file contents
         try {
             Scanner readFile = new Scanner(file);
 
+            // calculate size needed for arrays
             int lines = countRecords(readFile, 1);
 
             adjList = new LL[lines];
@@ -160,10 +165,10 @@ public class TopoSort {
 
                 String[] rightSideValues = parts.length > 1 ? parts[1].split(",") : new String[0];
 
-                // Check if a node with the same value already exists in the info array
+                // check if a node with the same value already exists in the info array
                 LL.Node existingNode = info[leftValue];
 
-                // If it exists, use the existing node; otherwise, create a new one
+                // if it exists use the existing node, otherwise create a new one
                 LL.Node node;
                 if(existingNode != null){
                     node = existingNode;
@@ -177,11 +182,11 @@ public class TopoSort {
 
                     int neighborValue = Integer.parseInt(value);
 
-                    // Add the neighbor node to the list
+                    // add the neighbor node to the linked list
                     list.addFirst(new LL.Node(neighborValue));
                 }
 
-                // Set the linked list at the correct index in the array
+                // set the linked list at the correct index in the array
                 adjList[leftValue] = list;
             }
 

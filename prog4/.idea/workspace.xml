@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01d55241-a31f-4e90-8dd5-7eaac316cfd1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TopoSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TopoSort.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +78,7 @@
       <workItem from="1700431178927" duration="15404000" />
       <workItem from="1700502622233" duration="594000" />
       <workItem from="1700589399556" duration="5178000" />
+      <workItem from="1700683453790" duration="349000" />
     </task>
     <servers />
   </component>
@@ -89,20 +87,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/TopoSort.java</url>
-          <line>10</line>
-          <properties class="TopoSort" method="graphDFS">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

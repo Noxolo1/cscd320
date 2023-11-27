@@ -1,3 +1,5 @@
+// Nate Wilson
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -8,7 +10,7 @@ public class TopoSort {
 
     public void graphDFS(LL[] G, LL.Node[] info , LL.Node node, LL resultList) {
 
-        System.out.println(node.value);
+        //System.out.println(node.value);
         this.time++;
         node.d = this.time;
         node.visited = true;
@@ -65,26 +67,15 @@ public class TopoSort {
         LL resultList;
         resultList = ts.DFS(G, info);
 
-        System.out.print("Topological Sort: ");
-        for(int i = 0; i < resultList.size; i++){
-            System.out.print(resultList.get(i).value + " ");
+        for(int i = 0; i < resultList.size; i++) {
+            System.out.print(resultList.get(i).value);
+            if (i < resultList.size - 1) {
+                System.out.print(",");
+            }
         }
     }
 
-    // Helper method to find a node with a specific value in the adjacency list
-    /*private static LL.Node findNode(LL[] adjList, int value) {
-        for (LL list : adjList) {
-            if (list != null) {
-                LL.Node foundNode = list.find(value);
-                if (foundNode != null) {
-                    return foundNode;
-                }
-            }
-        }
-        return null;
-    }*/
-
-
+    // method to count how many lines are in a file
     public static int countRecords(final Scanner fin, final int linesPer) {
 
         //throw exceptions
@@ -115,16 +106,17 @@ public class TopoSort {
     }
 
     public static void main(String[] args) {
+
         // check to make sure user entered input correctly
-        /*if (args.length != 1) {
+        if (args.length != 1) {
             System.out.println("Format for command line input: java <program_name> <filename> ");
             return;
-        }*/
+        }
 
         // file name is at position 0 in args
-        //String filename = args[0];
+        String filename = args[0];
 
-        File file = new File("C:\\Users\\Nate\\Documents\\GitHub\\cscd320\\prog4\\DAG4.txt");
+        File file = new File(filename);
 
         // adjList to represent graph
         LL[] adjList;
@@ -133,7 +125,7 @@ public class TopoSort {
 
         // want to read through file and insert each line
         // into the array list where the value of the node on the
-        // left of the : is stored in arraylist at the value
+        // left of the colon is stored in arraylist at the value
 
         // 1. read the line
         // 2. split at semicolon
@@ -154,6 +146,7 @@ public class TopoSort {
             readFile = new Scanner(file);
 
             while (readFile.hasNextLine()) {
+
                 // create empty list
                 LL list = new LL(null, 0);
 
@@ -170,6 +163,7 @@ public class TopoSort {
 
                 // if it exists use the existing node, otherwise create a new one
                 LL.Node node;
+
                 if(existingNode != null){
                     node = existingNode;
                 }
@@ -195,8 +189,6 @@ public class TopoSort {
             throw new RuntimeException(e);
         }
 
-        TopoSort ts = new TopoSort();
         topoSort(adjList, info);
-
     }
 }

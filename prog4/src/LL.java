@@ -1,4 +1,4 @@
-import java.util.*;
+// Nate Wilson
 
 public class LL {
 
@@ -40,20 +40,6 @@ public class LL {
         size++;
     }
 
-    /*public Node find(int value){
-
-        Node cur = head;
-
-        while(cur != null){
-            if(cur.value == value){
-                return cur;
-            }
-            cur = cur.next;
-        }
-
-        return null;
-    }*/
-
     public Node get(final int index){
 
         if(index < 0 || index >= size){
@@ -68,12 +54,11 @@ public class LL {
         }
 
         return current;
-    }// end get
-
+    }
 
     public int size(){
 
         return this.size;
-    }// end size
+    }
 
-}// end list
+}

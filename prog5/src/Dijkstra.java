@@ -5,9 +5,13 @@ import java.util.Scanner;
 
 public class Dijkstra {
 
-    public static void DijkstraAlgo(LL[] adjList, LL.Node[] info, int sourceVertex){
+    // adjList to represent graph
+    public static LL[] adjList;
+    // info array to hold info about nodes in the graph
+    public static LL.Node[] info;
 
-        for(int i = 0; i < adjList.length; i++){
+    public static void DijkstraAlgo(LL[] adjList, LL.Node[] info, int sourceVertex) {
+        for (int i = 0; i < info.length; i++) {
             info[i].d = Integer.MAX_VALUE;
             info[i].p = null;
         }
@@ -15,8 +19,45 @@ public class Dijkstra {
         info[sourceVertex].d = 0;
 
         LL.Node[] S = new LL.Node[info.length];
-
         MinHeap Q = new MinHeap(info);
+        Q.buildMinHeap(Q);
+
+        while (Q.heapSize != 0) {
+
+            LL.Node u = Q.extractMin();
+            S[u.value] = u;
+
+            for (int i = 0; i < adjList[u.value].size; i++) {
+                LL.Node v = info[adjList[u.value].get(i).value];
+
+                if (!v.visited && v.d > (u.d + v.weight)) {
+                    v.d = u.d + v.weight;
+                    v.p = u;
+                    Q.buildMinHeap(Q); // Rebuild the min-heap after updating distances
+                }
+            }
+        }
+
+        // Print the result
+        for (int i = 0; i < S.length; i++) {
+            if (S[i].d == Integer.MAX_VALUE) {
+                System.out.println("[" + i + "] unreachable");
+            } else {
+                System.out.print("[" + i + "] shortest path: (" + sourceVertex);
+                printShortestPath(S[i]);
+                System.out.println(") shortest distance: " + S[i].d);
+            }
+        }
+    }
+
+    // Helper method to print the shortest path
+    private static void printShortestPath(LL.Node node) {
+        if (node.p != null) {
+            printShortestPath(node.p);
+            System.out.print(", " + node.value);
+        } else {
+            System.out.print(", " + node.value);
+        }
     }
 
     // method to count how many lines are in a file
@@ -61,34 +102,29 @@ public class Dijkstra {
         //String filename = args[0];
         //int sourceValue = args[2];
 
-        File file = new File("/Users/nwilson/Documents/GitHub/cscd320/prog5/src/graph1.txt");
-
-        // adjList to represent graph
-        LL[] adjList;
-        // info array to hold info about nodes in the graph
-        LL.Node[] info;
+        File file = new File("C:\\Users\\Nate\\Documents\\GitHub\\cscd320\\prog5\\src\\graph1.txt");
 
         // read through file and populate intArrayList with file contents
         try {
             Scanner readFile = new Scanner(file);
 
-            // calculate size needed for arrays
             int lines = countRecords(readFile, 1);
 
             adjList = new LL[lines];
             info = new LL.Node[lines];
 
+            // Initialize the adjacency list and info array
+            for (int i = 0; i < lines; i++) {
+                adjList[i] = new LL(null, 0);
+                info[i] = new LL.Node(i, 0);
+            }
+
             readFile = new Scanner(file);
 
             while (readFile.hasNextLine()) {
-
-                // create empty list
                 LL list = new LL(null, 0);
 
-                // split the line at colon
                 String[] parts = readFile.nextLine().split(":");
-
-                // parse left and right side values
                 int leftValue = Integer.parseInt(parts[0]);
 
                 String[] rightSideValues = parts.length > 1 ? parts[1].split(";") : new String[0];
@@ -124,6 +160,10 @@ public class Dijkstra {
             throw new RuntimeException(e);
         }
 
+        LL.Node[] S;
+
+        System.out.println();
+        DijkstraAlgo(adjList, info, 0);
         System.out.println();
     }
 }

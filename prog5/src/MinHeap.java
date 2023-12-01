@@ -5,32 +5,19 @@ import java.util.Random;
 public class MinHeap {
 
     // array containing minHeap
-    private LL.Node[] array;
+    public LL.Node[] array;
 
     // size of heap
-    private int heapSize = 5;
+    public int heapSize = Dijkstra.adjList.length;
 
     // length of the array
-    private int length = 5;
+    public int length = Dijkstra.adjList.length;
 
     // heap constructor
     public MinHeap(final LL.Node[] array){
 
         this.array = array;
     }
-
-    /*public int[] populateArray(){
-
-        Random rd = new Random(); // creating Random object
-        //int[] this.array = new int[this.length];
-        for (int i = this.heapSize; i >= 1; i--) {
-            this.array[this.heapSize - i] =  rd.nextInt(1,100); // storing random integers in an array
-        }
-
-        this.array = new int[] {5,4,3,2,1,0};
-
-        return this.array;
-    }*/
 
     public LL.Node[] getArray() {
         return this.array;
@@ -79,20 +66,20 @@ public class MinHeap {
             if (rightChildIndex < a.length) {
 
                 // compare parent to children
-                if (a[i].value > a[leftChildIndex].value || a[i].value > a[rightChildIndex].value) {
+                if (a[i].d > a[leftChildIndex].d || a[i].d > a[rightChildIndex].d) {
 
                     // if left child smaller, then swap left child and parent
-                    if (a[leftChildIndex].value < a[rightChildIndex].value) {
-                        temp = a[i].value;
+                    if (a[leftChildIndex].d < a[rightChildIndex].d) {
+                        temp = a[i].d;
                         a[i] = a[leftChildIndex];
-                        a[leftChildIndex].value = temp;
+                        a[leftChildIndex].d = temp;
                         minHeapify(minHeap, leftChildIndex);
                     }
                     //otherwise swap right child and parent
                     else {
-                        temp = a[i].value;
+                        temp = a[i].d;
                         a[i] = a[rightChildIndex];
-                        a[rightChildIndex].value = temp;
+                        a[rightChildIndex].d = temp;
                         minHeapify(minHeap, rightChildIndex);
                     }
                 }
@@ -100,9 +87,9 @@ public class MinHeap {
             if (rightChildIndex == a.length){
 
                 if (!isLeafNode(i)){
-                    temp = a[i].value;
+                    temp = a[i].d;
                     a[i] = a[leftChildIndex];
-                    a[leftChildIndex].value = temp;
+                    a[leftChildIndex].d = temp;
                     minHeapify(minHeap, leftChildIndex);
                 }
             }
@@ -113,6 +100,24 @@ public class MinHeap {
         for (int i = (this.heapSize / 2); i >= 0; i--) {
             minHeapify(minHeap, i);
         }
+    }
+
+    public LL.Node extractMin() {
+
+        if (this.heapSize < 1) {
+            // Heap underflow, return an error value or handle it accordingly
+            System.out.println("Heap underflow");
+            return null;
+        }
+
+        LL.Node min = this.array[0];  // The minimum element is at the root
+        this.array[0] = this.array[this.heapSize - 1]; // Replace root with the last element
+        this.heapSize--;
+
+        // Maintain the min-heap property by calling minHeapify
+        minHeapify(this, 0);
+
+        return min;
     }
 
     public void heapSort(MinHeap minHeap){

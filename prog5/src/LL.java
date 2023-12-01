@@ -4,16 +4,16 @@ public class LL {
 
     public static class Node{
 
-        public int value, d, f;
+        public int value, d, weight;
         public boolean visited;
         public Node p;
 
         public Node next;
 
-        public Node(int value) {
+        public Node(int value, int weight) {
             this.value = value;
+            this.weight = weight;
             this.d = 0;
-            this.f = 0;
             this.visited = false;
             this.next = null;
             this.p = null;

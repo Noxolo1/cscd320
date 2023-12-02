@@ -12,7 +12,7 @@ public class Dijkstra {
 
     public static void DijkstraAlgo(LL[] adjList, LL.Node[] info, int sourceVertex) {
         for (int i = 0; i < info.length; i++) {
-            info[i].d = Integer.MAX_VALUE;
+            info[i].d = 2047483647;
             info[i].p = null;
         }
 
@@ -28,37 +28,43 @@ public class Dijkstra {
             S[u.value] = u;
 
             for (int i = 0; i < adjList[u.value].size; i++) {
-                LL.Node v = info[adjList[u.value].get(i).value];
 
-                if (!v.visited && v.d > (u.d + v.weight)) {
-                    v.d = u.d + v.weight;
-                    v.p = u;
-                    Q.buildMinHeap(Q); // Rebuild the min-heap after updating distances
+                LL.Node v = adjList[u.value].get(i);
+                LL.Node z = info[adjList[u.value].get(i).value];
+
+                if (z.d > (u.d + v.weight)) {
+                    z.d = u.d + v.weight;
+                    z.p = u;
+                    Q.minHeapify(0); // Rebuild the min-heap after updating distances
                 }
             }
         }
 
         // Print the result
         for (int i = 0; i < S.length; i++) {
-            if (S[i].d == Integer.MAX_VALUE) {
-                System.out.println("[" + i + "] unreachable");
-            } else {
-                System.out.print("[" + i + "] shortest path: (" + sourceVertex);
-                printShortestPath(S[i]);
-                System.out.println(") shortest distance: " + S[i].d);
+            if (i != sourceVertex) {
+                if (S[i].d == 2047483647) {
+                    System.out.println("[" + i + "] unreachable");
+                } else {
+                    System.out.print("[" + i + "] shortest path: (");
+                    printShortestPath(S[i]);
+                    System.out.println(") shortest distance: " + S[i].d);
+                }
             }
         }
     }
 
     // Helper method to print the shortest path
+    // Helper method to print the shortest path
     private static void printShortestPath(LL.Node node) {
         if (node.p != null) {
             printShortestPath(node.p);
-            System.out.print(", " + node.value);
+            System.out.print("," + node.value);
         } else {
-            System.out.print(", " + node.value);
+            System.out.print(node.value);
         }
     }
+
 
     // method to count how many lines are in a file
     public static int countRecords(final Scanner fin, final int linesPer) {
@@ -138,7 +144,7 @@ public class Dijkstra {
                 if (existingNode != null) {
                     node = existingNode;
                 } else {
-                    node = new LL.Node(leftValue, 0); // assuming weight is not provided in the input
+                    node = new LL.Node(leftValue, 0);
                     info[leftValue] = node;
                 }
 
@@ -160,10 +166,8 @@ public class Dijkstra {
             throw new RuntimeException(e);
         }
 
-        LL.Node[] S;
-
         System.out.println();
-        DijkstraAlgo(adjList, info, 0);
+        DijkstraAlgo(adjList, info, 3);
         System.out.println();
     }
 }

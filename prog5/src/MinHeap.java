@@ -52,9 +52,9 @@ public class MinHeap {
         return rightChildIndex(index) >= this.heapSize && leftChildIndex(index) >= this.heapSize;
     }
 
-    private void minHeapify(MinHeap minHeap, int i){
+    /*public void minHeapify(MinHeap minHeap, int i){
 
-        int temp;
+        LL.Node temp;
         LL.Node[] a = minHeap.array;
         int leftChildIndex = minHeap.leftChildIndex(i);
         int rightChildIndex = minHeap.rightChildIndex(i);
@@ -63,42 +63,78 @@ public class MinHeap {
         // then compare each child node with parent and pick smallest one
         if (!isLeafNode(i)){
 
-            if (rightChildIndex < a.length) {
+            if (rightChildIndex < heapSize) {
 
                 // compare parent to children
                 if (a[i].d > a[leftChildIndex].d || a[i].d > a[rightChildIndex].d) {
 
                     // if left child smaller, then swap left child and parent
                     if (a[leftChildIndex].d < a[rightChildIndex].d) {
-                        temp = a[i].d;
+                        temp = a[i];
                         a[i] = a[leftChildIndex];
-                        a[leftChildIndex].d = temp;
+                        a[leftChildIndex] = temp;
                         minHeapify(minHeap, leftChildIndex);
                     }
                     //otherwise swap right child and parent
                     else {
-                        temp = a[i].d;
+                        temp = a[i];
                         a[i] = a[rightChildIndex];
-                        a[rightChildIndex].d = temp;
+                        a[rightChildIndex] = temp;
                         minHeapify(minHeap, rightChildIndex);
                     }
                 }
             }
-            if (rightChildIndex == a.length){
+            if (rightChildIndex == heapSize){
 
                 if (!isLeafNode(i)){
-                    temp = a[i].d;
+                    temp = a[i];
                     a[i] = a[leftChildIndex];
-                    a[leftChildIndex].d = temp;
+                    a[leftChildIndex] = temp;
                     minHeapify(minHeap, leftChildIndex);
                 }
             }
         }
-    }
+    }*/
 
+    // heapify the node at i
+    public void minHeapify(int i) {
+
+        LL.Node temp;
+        int leftChildIndex = leftChildIndex(i);
+        int rightChildIndex = rightChildIndex(i);
+
+        // Check if left child index is within bounds
+        if (leftChildIndex < heapSize) {
+            // Check if right child index is within bounds
+            if (rightChildIndex < heapSize) {
+                // If the node is a non-leaf node and any of its child is smaller
+                if (array[i].d > array[leftChildIndex].d || array[i].d > array[rightChildIndex].d) {
+                    if (array[leftChildIndex].d < array[rightChildIndex].d) {
+                        temp = array[i];
+                        array[i] = array[leftChildIndex];
+                        array[leftChildIndex] = temp;
+                        minHeapify(leftChildIndex);
+                    } else {
+                        temp = array[i];
+                        array[i] = array[rightChildIndex];
+                        array[rightChildIndex] = temp;
+                        minHeapify(rightChildIndex);
+                    }
+                }
+            }
+            // If only the left child is present
+            else if (array[i].d > array[leftChildIndex].d) {
+                temp = array[i];
+                array[i] = array[leftChildIndex];
+                array[leftChildIndex] = temp;
+                minHeapify(leftChildIndex);
+            }
+        }
+    }
+    
     public void buildMinHeap(MinHeap minHeap) {
         for (int i = (this.heapSize / 2); i >= 0; i--) {
-            minHeapify(minHeap, i);
+            minHeapify(i);
         }
     }
 
@@ -115,7 +151,7 @@ public class MinHeap {
         this.heapSize--;
 
         // Maintain the min-heap property by calling minHeapify
-        minHeapify(this, 0);
+        minHeapify(0);
 
         return min;
     }

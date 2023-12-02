@@ -1,3 +1,5 @@
+// Nate Wilson
+
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -44,11 +46,11 @@ public class Dijkstra {
         for (int i = 0; i < S.length; i++) {
             if (i != sourceVertex) {
                 if (S[i].d == 2047483647) {
-                    System.out.println("[" + i + "] unreachable");
+                    System.out.println("[" + i + "]unreachable");
                 } else {
-                    System.out.print("[" + i + "] shortest path: (");
+                    System.out.print("[" + i + "]shortest path:(");
                     printShortestPath(S[i]);
-                    System.out.println(") shortest distance: " + S[i].d);
+                    System.out.println(") shortest distance:" + S[i].d);
                 }
             }
         }
@@ -99,16 +101,16 @@ public class Dijkstra {
     public static void main(String[] args) {
 
         // check to make sure user entered input correctly
-        /*if (args.length != 1) {
+        if (args.length != 2) {
             System.out.println("Format for command line input: java <program_name> <filename> <sourceVertex>");
             return;
-        }*/
+        }
 
         // file name is at position 0 in args
-        //String filename = args[0];
-        //int sourceValue = args[2];
+        String filename = args[0];
+        int sourceVertex = Integer.parseInt(args[1]);
 
-        File file = new File("C:\\Users\\Nate\\Documents\\GitHub\\cscd320\\prog5\\src\\graph1.txt");
+        File file = new File(filename);
 
         // read through file and populate intArrayList with file contents
         try {
@@ -166,8 +168,6 @@ public class Dijkstra {
             throw new RuntimeException(e);
         }
 
-        System.out.println();
-        DijkstraAlgo(adjList, info, 3);
-        System.out.println();
+        DijkstraAlgo(adjList, info, sourceVertex);
     }
 }

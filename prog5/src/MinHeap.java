@@ -52,50 +52,6 @@ public class MinHeap {
         return rightChildIndex(index) >= this.heapSize && leftChildIndex(index) >= this.heapSize;
     }
 
-    /*public void minHeapify(MinHeap minHeap, int i){
-
-        LL.Node temp;
-        LL.Node[] a = minHeap.array;
-        int leftChildIndex = minHeap.leftChildIndex(i);
-        int rightChildIndex = minHeap.rightChildIndex(i);
-
-        // if the node is not a leaf node and any child is smaller
-        // then compare each child node with parent and pick smallest one
-        if (!isLeafNode(i)){
-
-            if (rightChildIndex < heapSize) {
-
-                // compare parent to children
-                if (a[i].d > a[leftChildIndex].d || a[i].d > a[rightChildIndex].d) {
-
-                    // if left child smaller, then swap left child and parent
-                    if (a[leftChildIndex].d < a[rightChildIndex].d) {
-                        temp = a[i];
-                        a[i] = a[leftChildIndex];
-                        a[leftChildIndex] = temp;
-                        minHeapify(minHeap, leftChildIndex);
-                    }
-                    //otherwise swap right child and parent
-                    else {
-                        temp = a[i];
-                        a[i] = a[rightChildIndex];
-                        a[rightChildIndex] = temp;
-                        minHeapify(minHeap, rightChildIndex);
-                    }
-                }
-            }
-            if (rightChildIndex == heapSize){
-
-                if (!isLeafNode(i)){
-                    temp = a[i];
-                    a[i] = a[leftChildIndex];
-                    a[leftChildIndex] = temp;
-                    minHeapify(minHeap, leftChildIndex);
-                }
-            }
-        }
-    }*/
-
     // heapify the node at i
     public void minHeapify(int i) {
 
@@ -156,26 +112,4 @@ public class MinHeap {
         return min;
     }
 
-    public void heapSort(MinHeap minHeap){
-
-        //buildMinHeap(minHeap);
-        //for()
-
-        //uses buildMinHeap as a helper
-    }
-
-    /*public void heapSort(int[] a){
-
-        buildMinHeap(a);
-        for(int i = a.length - 1; i >= 1; i--){
-
-            int temp = a[0];
-            a[0] = a[i];
-            a[i] = temp;
-            heapSize--;
-            minHeapify(a, 0);
-        }
-    }*/
-
-    //may need a few other methods
 }

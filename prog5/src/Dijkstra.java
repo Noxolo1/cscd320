@@ -101,16 +101,16 @@ public class Dijkstra {
     public static void main(String[] args) {
 
         // check to make sure user entered input correctly
-        if (args.length != 2) {
+        /*if (args.length != 2) {
             System.out.println("Format for command line input: java <program_name> <filename> <sourceVertex>");
             return;
-        }
+        }*/
 
         // file name is at position 0 in args
-        String filename = args[0];
-        int sourceVertex = Integer.parseInt(args[1]);
+        //String filename = args[0];
+        //int sourceVertex = Integer.parseInt(args[1]);
 
-        File file = new File(filename);
+        File file = new File("C:\\Users\\Nate\\Documents\\GitHub\\cscd320\\prog5\\src\\graph1.txt");
 
         // read through file and populate intArrayList with file contents
         try {
@@ -168,6 +168,6 @@ public class Dijkstra {
             throw new RuntimeException(e);
         }
 
-        DijkstraAlgo(adjList, info, sourceVertex);
+        DijkstraAlgo(adjList, info, 0);
     }
 }
